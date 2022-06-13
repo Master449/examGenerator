@@ -2,7 +2,7 @@
  * @file main.cpp
  * @author David Flowers
  * @brief Just a simple coding exercise where I try to use
- *        classes to create an Exam generator.
+ *        classes to create an Exam generator for a teacher.
  * @version 0.1
  * @date 2022-04-19
  */
@@ -11,6 +11,7 @@
 #include <string>
 #include <fstream>
 #include "question.h"
+#include "utils.h"
 
 using std::cout;
 using std::cin;
@@ -26,6 +27,8 @@ int main() {
     int shortTotal;
     int questionNum = 1;
     string s;
+
+    clearConsole();
 
     do {
         cout << "How many questions would you like to generate? ";
@@ -51,16 +54,12 @@ int main() {
     question multiArray[multipleTotal];
     question shortArray[shortTotal];
 
-    cout << "Generated question arrays.\nTime to set them up.\n\n";
-
-    cout << "Generation for True or False Questions.\n";
-    if (TorFtotal == 0) {
-        cout << "None needed.\n\n";
-    }
+    clearConsole();
 
     cin.ignore();
 
     for(int i = 0; i < TorFtotal; i++) {
+        cout << "Generation for True or False Questions.\n";
         torfArray[i].unset = false;
         torfArray[i].setType('T');
         
@@ -68,14 +67,11 @@ int main() {
         getline(cin, s);
 
         torfArray[i].setQuestion(s);
-    }
-
-    cout << "\nGeneration for Multiple Choice Questions.\n";
-    if (multipleTotal == 0) {
-        cout << "None needed.\n\n";
+        clearConsole();
     }
 
     for(int i = 0; i < multipleTotal; i++) {
+        cout << "\nGeneration for Multiple Choice Questions.\n";
         multiArray[i].unset = false;
         multiArray[i].setType('M');
 
@@ -98,14 +94,12 @@ int main() {
         cout << "    " << i+1 << "a. Enter Option 4: ";
         getline(cin, s);
         multiArray[i].option4 = s;
-    }
 
-    cout << "\nGeneration Short Answer Questions.\n";
-    if (shortTotal == 0) {
-        cout << "None needed.\n\n";
+        clearConsole();
     }
 
     for(int i = 0; i < shortTotal; i++) {
+        cout << "\nGeneration Short Answer Questions.\n";
         shortArray[i].unset = false;
         shortArray[i].setType('M');
 
@@ -113,10 +107,11 @@ int main() {
         getline(cin, s);
 
         shortArray[i].setQuestion(s);
+        
+        clearConsole();
     }
 
-    cout << "Printing Questions: \n\n";
-
+    clearConsole();
 
     for(int i = 0; i < TorFtotal; i++) {
         cout << questionNum++ << ". " << torfArray[i].getQuestion() << "\n";
